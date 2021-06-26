@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BF1RecordQuery"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" x:Name="Window_Main" WindowStartupLocation="CenterScreen"
         FontFamily="/Fonts/#FuturaMaxiBook-TC" FontWeight="Light"
-        Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900">
+        Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900"
+        Loaded="Window_Main_Loaded">
+
     <Window.Background>
         <ImageBrush ImageSource="/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg" Stretch="UniformToFill"/>
     </Window.Background>
@@ -41,7 +43,7 @@
             </Grid.RowDefinitions>
 
             <DockPanel LastChildFill="True" Grid.Row="0">
-                <Button Style="{StaticResource MyButtonStyle}" x:Name="Button_QueryRecord" 
+                <Button x:Name="Button_QueryRecord" Style="{StaticResource MyButtonStyle}" 
                         DockPanel.Dock="Right" Content="查詢" 
                         Margin="5" Padding="30,10,30,10" Foreground="White"
                         Click="Button_QueryRecord_Click"/>
@@ -57,10 +59,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Border  BorderBrush="#c0c4ca" BorderThickness="0.7" Margin="5">
-                    <Image Grid.Column="0" Margin="5" Stretch="Uniform"
-                           Width="60" Height="60" x:Name="Image_UserAvatar"/>
-                </Border>
+                <Image x:Name="Image_UserAvatar" Grid.Column="0" Margin="5" 
+                       RenderOptions.BitmapScalingMode="HighQuality" Cursor="Hand"
+                       Stretch="Uniform" Width="60" Height="60" 
+                       MouseLeftButtonDown="Image_UserAvatar_MouseLeftButtonDown"/>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -129,7 +131,7 @@
                         </Grid>
 
                         <Grid.ToolTip>
-                            <Border Background="#5d5a58">
+                            <Border Background="#5d5a58" Padding="0">
                                 <Image Source="{Binding WeaponImage}"/>
                             </Border>
                         </Grid.ToolTip>

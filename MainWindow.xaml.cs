@@ -28,6 +28,11 @@ namespace BF1RecordQuery
             InitializeComponent();
         }
 
+        private void Window_Main_Loaded(object sender, RoutedEventArgs e)
+        {
+            UpdateBackground();
+        }
+
         private async void Button_QueryRecord_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -186,7 +191,7 @@ namespace BF1RecordQuery
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生了未知错误 {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -202,6 +207,39 @@ namespace BF1RecordQuery
 
                 return $"★ {count}";
             }
+        }
+
+        private void UpdateBackground()
+        {
+            ImageBrush b = new ImageBrush();
+            Random random = new Random();
+            int a = random.Next(0, 4);
+            switch (a)
+            {
+                case 0:
+                    b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Beachhead_BGLoop-4f04c02e.jpg"));
+                    b.Stretch = Stretch.Fill;
+                    break;
+                case 1:
+                    b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Harbor_BGLoop-70b9c5f4.jpg"));
+                    b.Stretch = Stretch.Fill;
+                    break;
+                case 2:
+                    b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Naval_BGLoop-dd6e9a89.jpg"));
+                    b.Stretch = Stretch.Fill;
+                    break;
+                case 3:
+                    b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg"));
+                    b.Stretch = Stretch.Fill;
+                    break;
+            }
+
+            Window_Main.Background = b;
+        }
+
+        private void Image_UserAvatar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            UpdateBackground();
         }
     }
 }
