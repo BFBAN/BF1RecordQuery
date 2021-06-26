@@ -11,10 +11,18 @@
 
   <ItemGroup>
     <None Remove="Fonts\FuturaMaxiBook-TC-c3bf1e0d.ttf" />
+    <None Remove="Image\Backgrounds\MP_Beachhead_BGLoop-4f04c02e.jpg" />
+    <None Remove="Image\Backgrounds\MP_Harbor_BGLoop-70b9c5f4.jpg" />
+    <None Remove="Image\Backgrounds\MP_Naval_BGLoop-dd6e9a89.jpg" />
+    <None Remove="Image\Backgrounds\MP_Ridge_BGLoop-22333a03.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Fonts\FuturaMaxiBook-TC-c3bf1e0d.ttf" />
+    <Resource Include="Image\Backgrounds\MP_Beachhead_BGLoop-4f04c02e.jpg" />
+    <Resource Include="Image\Backgrounds\MP_Harbor_BGLoop-70b9c5f4.jpg" />
+    <Resource Include="Image\Backgrounds\MP_Naval_BGLoop-dd6e9a89.jpg" />
+    <Resource Include="Image\Backgrounds\MP_Ridge_BGLoop-22333a03.jpg" />
   </ItemGroup>
 
 </Project>

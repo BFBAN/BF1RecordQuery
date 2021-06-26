@@ -7,6 +7,24 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         FontFamily="/Fonts/#FuturaMaxiBook-TC" FontWeight="Light"
         Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900">
+    <Window.Background>
+        <ImageBrush ImageSource="/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#c0c4ca"/>
+
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        </Style>
+    </Window.Resources>
 
     <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>
@@ -23,10 +41,14 @@
             </Grid.RowDefinitions>
 
             <DockPanel LastChildFill="True" Grid.Row="0">
-                <Button x:Name="Button_QueryRecord" DockPanel.Dock="Right" Content="查詢" Margin="5" Padding="25,10,25,10"
+                <Button Style="{StaticResource MyButtonStyle}" x:Name="Button_QueryRecord" 
+                        DockPanel.Dock="Right" Content="查詢" 
+                        Margin="5" Padding="30,10,30,10" Foreground="White"
                         Click="Button_QueryRecord_Click"/>
+
                 <TextBox x:Name="TextBox_PlayerName" Text="CrazyZhang666" VerticalContentAlignment="Center" 
-                         Margin="5" Padding="3"/>
+                         Margin="5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
+                         CaretBrush="White"/>
             </DockPanel>
 
             <Grid Grid.Row="1">
@@ -35,7 +57,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Border BorderBrush="Gray" BorderThickness="0.7" Margin="5">
+                <Border  BorderBrush="#c0c4ca" BorderThickness="0.7" Margin="5">
                     <Image Grid.Column="0" Margin="5" Stretch="Uniform"
                            Width="60" Height="60" x:Name="Image_UserAvatar"/>
                 </Border>
@@ -47,7 +69,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock x:Name="TextBlock_UserName" Grid.Row="0" Text="玩家ID"
-                               VerticalAlignment="Bottom" Margin="5,5,5,0" FontSize="24"/>
+                               VerticalAlignment="Bottom" Margin="5,5,5,0" FontSize="23"/>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
                         <Image x:Name="Image_Rank" Margin="5,0,5,5" VerticalAlignment="Center"/>
@@ -63,7 +85,8 @@
                 <ListBox.Resources>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Padding" Value="5"/>
-                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Foreground" Value="White"/>
                     </Style>
                 </ListBox.Resources>
             </ListBox>
@@ -84,9 +107,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Grid.Column="0" Background="#5d5a58">
-                            <Image Width="80" Height="40" Source="{Binding WeaponImage}" Stretch="Uniform"/>
-                        </Border>
+                        <Image Grid.Column="0" Width="80" Height="40" Source="{Binding WeaponImage}" Stretch="Uniform"/>
+
                         <Grid Grid.Column="1" Margin="10,0,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -94,15 +116,15 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding WeaponName}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponStar}" Foreground="#f17f1a" FontSize="14"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponName}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponStar}" Foreground="#ffa200" FontSize="13"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding WeaponKill}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponKPM}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponAccuracy}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponHeadshots}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponHitVKills}" FontSize="14"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponKill}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponKPM}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponAccuracy}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponHeadshots}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding WeaponHitVKills}" FontSize="13"/>
                             </StackPanel>
                         </Grid>
 
@@ -131,9 +153,8 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Grid.Column="0" Background="#5d5a58">
-                            <Image Width="80" Height="40" Source="{Binding VehicleImage}" Stretch="Uniform"/>
-                        </Border>
+                        <Image Grid.Column="0" Width="80" Height="40" Source="{Binding VehicleImage}" Stretch="Uniform"/>
+
                         <Grid Grid.Column="1" Margin="10,0,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -141,13 +162,13 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding VehicleName}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleStar}" Foreground="#f17f1a" FontSize="14"/>
+                                <TextBlock Margin="5" Text="{Binding VehicleName}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding VehicleStar}" Foreground="#ffa200" FontSize="13"/>
                             </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding VehicleKill}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleKPM}" FontSize="14"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleDestroyede}" FontSize="14"/>
+                                <TextBlock Margin="5" Text="{Binding VehicleKill}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding VehicleKPM}" FontSize="13"/>
+                                <TextBlock Margin="5" Text="{Binding VehicleDestroyede}" FontSize="13"/>
                             </StackPanel>
                         </Grid>
 
