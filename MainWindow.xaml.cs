@@ -56,6 +56,7 @@ namespace BF1RecordQuery
                 TextBlock_Rank.Text = "Loading...";
                 TextBlock_PlayedTime.Text = "Loading...";
                 Image_UserAvatar.Source = null;
+                ImageToolTip_UserAvatar.Source = null;
                 Image_Rank.Source = null;
 
                 /*******************************************************************************/
@@ -73,6 +74,8 @@ namespace BF1RecordQuery
                     ListBox_GameTools_Stats.Items.Clear();
 
                     Image_UserAvatar.Source = new BitmapImage(new Uri(getStats.avatar));
+                    ImageToolTip_UserAvatar.Source = Image_UserAvatar.Source;
+
                     TextBlock_UserName.Text = getStats.userName;
                     Image_Rank.Source = new BitmapImage(new Uri(getStats.rankImg));
                     TextBlock_Rank.Text = getStats.rank.ToString();
@@ -179,12 +182,13 @@ namespace BF1RecordQuery
                 }
                 else
                 {
+                    TextBlock_UserName.Text = "未知";
+                    TextBlock_Rank.Text = "0";
+                    TextBlock_PlayedTime.Text = "0";
+
                     ListBox_GameTools_Stats.Items.Clear();
                     ListBox_GameTools_Weapons.Items.Clear();
                     ListBox_GameTools_Vehicles.Items.Clear();
-
-                    TextBlock_UserName.Text = "未知";
-                    TextBlock_Rank.Text = "0";
 
                     MessageBox.Show($"查询玩家（{nameStr}）战绩失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -234,6 +238,7 @@ namespace BF1RecordQuery
                     break;
             }
 
+            Window_Main.Background = null;
             Window_Main.Background = b;
         }
 

@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:BF1RecordQuery"
         mc:Ignorable="d" x:Name="Window_Main" WindowStartupLocation="CenterScreen"
         FontFamily="/Fonts/#FuturaMaxiBook-TC" FontWeight="Light"
-        Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900"
+        Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900" MinWidth="800"
         Loaded="Window_Main_Loaded">
 
     <Window.Background>
-        <ImageBrush ImageSource="/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg" 
+                    RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill"/>
     </Window.Background>
 
     <Window.Resources>
@@ -18,7 +19,7 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
 
-        <Style TargetType="ListBox">
+        <Style x:Key="ListBox"  TargetType="ListBox">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#c0c4ca"/>
@@ -49,7 +50,7 @@
                         Click="Button_QueryRecord_Click"/>
 
                 <TextBox x:Name="TextBox_PlayerName" Text="CrazyZhang666" VerticalContentAlignment="Center" 
-                         Margin="5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
+                         Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
                          CaretBrush="White"/>
             </DockPanel>
 
@@ -59,10 +60,15 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Image x:Name="Image_UserAvatar" Grid.Column="0" Margin="5" 
-                       RenderOptions.BitmapScalingMode="HighQuality" Cursor="Hand"
-                       Stretch="Uniform" Width="60" Height="60" 
-                       MouseLeftButtonDown="Image_UserAvatar_MouseLeftButtonDown"/>
+                <Border Grid.Column="0" Margin="5" Width="60" Height="60" BorderBrush="#c0c4ca" BorderThickness="1">
+                    <Image x:Name="Image_UserAvatar" Stretch="UniformToFill"
+                           RenderOptions.BitmapScalingMode="HighQuality" Cursor="Hand"
+                           MouseLeftButtonDown="Image_UserAvatar_MouseLeftButtonDown">
+                        <Image.ToolTip>
+                            <Image x:Name="ImageToolTip_UserAvatar" RenderOptions.BitmapScalingMode="HighQuality" />
+                        </Image.ToolTip>
+                    </Image>
+                </Border>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -83,103 +89,122 @@
                 </Grid>
             </Grid>
 
-            <ListBox Grid.Row="2" x:Name="ListBox_GameTools_Stats" Margin="5">
+            <ListBox Grid.Row="2" x:Name="ListBox_GameTools_Stats" Margin="5"
+                     Style="{StaticResource MyListBoxStyle}">
                 <ListBox.Resources>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="5"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="Foreground" Value="White"/>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=red,Path=IsChecked}" Value="True">
+                                <Setter Property="Background" Value="Red"></Setter>
+                                <Setter Property="Content" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </ListBox.Resources>
             </ListBox>
+
         </Grid>
 
-        <ListBox Grid.Column="1" x:Name="ListBox_GameTools_Weapons" Margin="5">
-            <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Padding" Value="5"/>
-                </Style>
-            </ListBox.Resources>
-
+        <ListBox Grid.Column="1" x:Name="ListBox_GameTools_Weapons" Margin="0,5,0,5"
+                 Style="{StaticResource MyListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Border Background="Transparent" Margin="-6" Padding="0,6,0,6"
+                            Width="{Binding ElementName=ListBox_GameTools_Weapons,Path=ActualWidth}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Width="80" Height="40" Source="{Binding WeaponImage}" Stretch="Uniform"/>
-
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding WeaponName}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponStar}" Foreground="#ffa200" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding WeaponKill}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponKPM}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponAccuracy}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponHeadshots}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding WeaponHitVKills}" FontSize="13"/>
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid.ToolTip>
-                            <Border Background="#5d5a58" Padding="0">
+                            <Border Grid.Column="0" x:Name="BorderWeapon" Margin="4,0,0,0"
+                                    Width="80" Height="50" Background="Transparent">
                                 <Image Source="{Binding WeaponImage}"/>
                             </Border>
-                        </Grid.ToolTip>
-                    </Grid>
+
+                            <Grid Grid.Column="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Margin="5" Text="{Binding WeaponName}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding WeaponStar}" Foreground="#ffa200" FontSize="13"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock Margin="5" Text="{Binding WeaponKill}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding WeaponKPM}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding WeaponAccuracy}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding WeaponHeadshots}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding WeaponHitVKills}" FontSize="13"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                        <!--<Border.ToolTip>
+                            <Border Background="#5d5a58">
+                                <Image Source="{Binding WeaponImage}"/>
+                            </Border>
+                        </Border.ToolTip>-->
+                    </Border>
+
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderWeapon" Property="Background" Value="#5c5957"/>
+                        </Trigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <ListBox Grid.Column="2" x:Name="ListBox_GameTools_Vehicles" Margin="5">
-            <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Padding" Value="5"/>
-                </Style>
-            </ListBox.Resources>
-
+        <ListBox Grid.Column="2" x:Name="ListBox_GameTools_Vehicles" Margin="5"
+                 Style="{StaticResource MyListBoxStyle}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Border Background="Transparent" Margin="-6" Padding="6"
+                            Width="{Binding ElementName=ListBox_GameTools_Weapons,Path=ActualWidth}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Width="80" Height="40" Source="{Binding VehicleImage}" Stretch="Uniform"/>
+                            <Border Grid.Column="0" x:Name="BorderVehicle" Margin="4,0,0,0"
+                                Width="80" Height="50" Background="Transparent">
+                                <Image Source="{Binding VehicleImage}"/>
+                            </Border>
 
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
+                            <Grid Grid.Column="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding VehicleName}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleStar}" Foreground="#ffa200" FontSize="13"/>
-                            </StackPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock Margin="5" Text="{Binding VehicleKill}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleKPM}" FontSize="13"/>
-                                <TextBlock Margin="5" Text="{Binding VehicleDestroyede}" FontSize="13"/>
-                            </StackPanel>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Margin="5" Text="{Binding VehicleName}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding VehicleStar}" Foreground="#ffa200" FontSize="13"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock Margin="5" Text="{Binding VehicleKill}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding VehicleKPM}" FontSize="13"/>
+                                    <TextBlock Margin="5" Text="{Binding VehicleDestroyede}" FontSize="13"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
 
-                        <Grid.ToolTip>
+                        <!--<Border.ToolTip>
                             <Border Background="#5d5a58">
                                 <Image Source="{Binding VehicleImage}"/>
                             </Border>
-                        </Grid.ToolTip>
-                    </Grid>
+                        </Border.ToolTip>-->
+                    </Border>
+
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderVehicle" Property="Background" Value="#5c5957"/>
+                        </Trigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

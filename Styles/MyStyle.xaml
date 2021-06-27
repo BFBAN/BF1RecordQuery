@@ -1,11 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <Style x:Key="FocusVisual">
+
+    <Style x:Key="ButtonFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Rectangle Margin="2" 
+                               StrokeDashArray="1 2" 
+                               SnapsToDevicePixels="true" 
+                               StrokeThickness="1" 
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -20,7 +24,7 @@
     <SolidColorBrush x:Key="Button.Disabled.Border" Color="#c0c4ca"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
     <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
         <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
@@ -69,5 +73,49 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <!--#########################################################################-->
+
+    <Style x:Key="MyListBoxStyle" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#c0c4ca"/>
+        <!--<Setter Property="BorderThickness" Value="0.7"/>-->
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border x:Name="Border"
+                                        BorderThickness="1" 
+                                        BorderBrush="Transparent">
+                                    <Label x:Name="Label"
+                                           Padding="5"
+                                           FontSize="13" 
+                                           Foreground="White">
+                                        <ContentPresenter></ContentPresenter>
+                                    </Label>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="White"/>
+                                        <Setter TargetName="Label" Property="Foreground" Value="Black"/>
+                                    </Trigger>
+
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content}" Value="">
+                                        <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                        <Setter TargetName="Label" Property="Foreground" Value="Transparent"/>
+                                    </DataTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
