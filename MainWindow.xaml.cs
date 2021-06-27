@@ -23,6 +23,8 @@ namespace BF1RecordQuery
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static int ImageCount = 2;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -112,15 +114,14 @@ namespace BF1RecordQuery
 
                     ListBox_GameTools_Stats.Items.Add($"仇敵擊殺數 : {getStats.avengerKills}");
                     ListBox_GameTools_Stats.Items.Add($"救星擊殺數 : {getStats.saviorKills}");
-                    ListBox_GameTools_Stats.Items.Add($"複活次數 : {getStats.revives}");
-                    ListBox_GameTools_Stats.Items.Add($"治療數 : {getStats.heals}");
-                    ListBox_GameTools_Stats.Items.Add($"修理數 : {getStats.repairs}");
+                    ListBox_GameTools_Stats.Items.Add($"急救數 : {getStats.revives}");
+                    ListBox_GameTools_Stats.Items.Add($"治療分 : {getStats.heals}");
+                    ListBox_GameTools_Stats.Items.Add($"修理分 : {getStats.repairs}");
 
                     //ListBox_GameTools_Stats.Items.Add($"遊戲時間 : {getStats.timePlayed}");
+                    ListBox_GameTools_Stats.Items.Add($"取得狗牌數 : {getStats.dogtagsTaken}");
                     ListBox_GameTools_Stats.Items.Add($"勝利場數 : {getStats.wins}");
                     ListBox_GameTools_Stats.Items.Add($"戰敗場數 : {getStats.loses}");
-
-                    ListBox_GameTools_Stats.Items.Add($"取得狗牌數 : {getStats.dogtagsTaken}");
                     ListBox_GameTools_Stats.Items.Add($"遊戲總局數 : {getStats.roundsPlayed}");
 
                     ListBox_GameTools_Stats.Items.Add("");
@@ -216,9 +217,16 @@ namespace BF1RecordQuery
         private void UpdateBackground()
         {
             ImageBrush b = new ImageBrush();
-            Random random = new Random();
-            int a = random.Next(0, 4);
-            switch (a)
+            if (ImageCount < 3)
+            {
+                ImageCount++;
+            }
+            else
+            {
+                ImageCount = 0;
+            }
+
+            switch (ImageCount)
             {
                 case 0:
                     b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Beachhead_BGLoop-4f04c02e.jpg"));
@@ -242,7 +250,7 @@ namespace BF1RecordQuery
             Window_Main.Background = b;
         }
 
-        private void Image_UserAvatar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Button_UpdateImage_Click(object sender, RoutedEventArgs e)
         {
             UpdateBackground();
         }
