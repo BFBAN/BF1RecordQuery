@@ -42,6 +42,7 @@ namespace BF1RecordQuery
 
             MainWorker = new BackgroundWorker();
             MainWorker.DoWork += MainWorker_DoWork;
+            MainWorker.RunWorkerAsync();
         }
 
         private void MainWorker_DoWork(object sender, DoWorkEventArgs e)

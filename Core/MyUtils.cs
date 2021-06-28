@@ -17,7 +17,7 @@ namespace BF1RecordQuery.Core
         /// <summary>
         /// 检查更新地址
         /// </summary>
-        public static string CheckUpdateAdress = @"https://cdn.staticaly.com/gh/BFBAN/BF1RecordQuery/main/Server/version.txt";
+        public static string CheckUpdateAdress = @"https://cdn.staticaly.com/gh/BFBAN/BF1RecordQuery/main/Server/Version.txt";
 
         /// <summary>
         /// 下载更新地址
