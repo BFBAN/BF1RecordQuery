@@ -13,8 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.Json;
+using System.ComponentModel;
 
 using BF1RecordQuery.Data;
+using BF1RecordQuery.Core;
+using System.Net;
 
 namespace BF1RecordQuery
 {
@@ -24,6 +27,7 @@ namespace BF1RecordQuery
     public partial class MainWindow : Window
     {
         private static int ImageCount = 2;
+        private BackgroundWorker MainWorker;
 
         public MainWindow()
         {
@@ -32,7 +36,38 @@ namespace BF1RecordQuery
 
         private void Window_Main_Loaded(object sender, RoutedEventArgs e)
         {
+            Title = MyUtils.WindowTitle + MyUtils.LocalVersionInfo;
+
             UpdateBackground();
+
+            MainWorker = new BackgroundWorker();
+            MainWorker.DoWork += MainWorker_DoWork;
+        }
+
+        private void MainWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // 刷新DNS缓存
+            MyUtils.CMD_Code("ipconfig /flushdns");
+
+            WebClient webClient = new WebClient();
+            webClient.Encoding = Encoding.UTF8;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
+            // 检查版本更新
+            string version = webClient.DownloadString(MyUtils.CheckUpdateAdress);
+            Version WebVersion = new Version(version);
+            Version LocalVersion = new Version(MyUtils.LocalVersionInfo);
+
+            if (WebVersion != LocalVersion)
+            {
+                string path = MyUtils.CurrentDirectory + MyUtils.WindowTitle + WebVersion + ".exe";
+
+                // 下载更新
+                MyUtils.HttpDownloadFile(MyUtils.DownloadUpdateAddress, path);
+
+                MessageBox.Show("新版本下载完成，你下次启动软件可以选择当前目录下的最新版本使用。", "提示",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private async void Button_QueryRecord_Click(object sender, RoutedEventArgs e)

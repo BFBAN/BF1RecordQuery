@@ -92,19 +92,7 @@
             </Grid>
 
             <ListBox Grid.Row="2" x:Name="ListBox_GameTools_Stats" Margin="5"
-                     Style="{StaticResource MyListBoxStyle}">
-                <ListBox.Resources>
-                    <Style TargetType="{x:Type ListBoxItem}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=red,Path=IsChecked}" Value="True">
-                                <Setter Property="Background" Value="Red"></Setter>
-                                <Setter Property="Content" Value="Red"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.Resources>
-            </ListBox>
-
+                     Style="{StaticResource MyListBoxStyle}"/>
         </Grid>
 
         <ListBox Grid.Column="1" x:Name="ListBox_GameTools_Weapons" Margin="0,5,0,5"
@@ -115,12 +103,12 @@
                             Width="{Binding ElementName=ListBox_GameTools_Weapons,Path=ActualWidth}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Column="0" x:Name="BorderWeapon" Margin="4,0,0,0"
-                                    Width="90" Height="60" Background="Transparent">
+                            <Border Grid.Column="0" x:Name="BorderWeapon" Margin="5,0,0,0"
+                                    Width="100" Height="60" Background="Transparent">
                                 <Image Margin="5" Source="{Binding WeaponImage}" Stretch="Uniform">
                                     <Image.ToolTip>
                                         <Border Background="#5d5a58">
@@ -168,12 +156,12 @@
                             Width="{Binding ElementName=ListBox_GameTools_Weapons,Path=ActualWidth}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Grid.Column="0" x:Name="BorderVehicle" Margin="4,0,0,0"
-                                    Width="90" Height="60" Background="Transparent">
+                            <Border Grid.Column="0" x:Name="BorderVehicle" Margin="5,0,0,0"
+                                    Width="100" Height="60" Background="Transparent">
                                 <Image Margin="5" Source="{Binding VehicleImage}" Stretch="Uniform">
                                     <Image.ToolTip>
                                         <Border Background="#5d5a58">
