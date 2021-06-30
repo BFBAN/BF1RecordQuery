@@ -49,8 +49,8 @@ namespace BF1RecordQuery
             MyUtils.CMD_Code("ipconfig /flushdns");
 
             WebClient webClient = new WebClient();
+            webClient.Proxy = null;
             webClient.Encoding = Encoding.UTF8;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
 
             // 检查版本更新
             string version = webClient.DownloadString(MyUtils.CheckUpdateAdress);
@@ -67,6 +67,8 @@ namespace BF1RecordQuery
                 MessageBox.Show("新版本下载完成，你下次启动软件可以选择当前目录下的最新版本使用。", "提示",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
+
+            webClient.Dispose();
         }
 
         private async void Button_QueryRecord_Click(object sender, RoutedEventArgs e)
