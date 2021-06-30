@@ -149,8 +149,8 @@
         <Setter Property="Background" Value="{StaticResource TabItem.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TabItem.Static.Border}"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="6"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="12,6,12,6"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Template">
@@ -312,8 +312,8 @@
                                 <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="0,0,0,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,0,0,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -321,10 +321,11 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
-                            <Setter Property="Margin" Value="-2,-2,-2,0"/>
+                            <Setter Property="Margin" Value="0"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
+                            <Setter Property="BorderThickness" TargetName="innerBorder" Value="0,0,0,0"/>
+                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,0,0,3"/>
+                            <Setter Property="BorderBrush" TargetName="mainBorder" Value="White"/>
                             <Setter Property="Foreground" Value="White"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>

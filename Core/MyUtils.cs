@@ -12,7 +12,7 @@ namespace BF1RecordQuery.Core
 {
     class MyUtils
     {
-        public static string WindowTitle = "[BFBAN] 战地1战绩查询工具 v";
+        public static string WindowTitle = "[BFBAN] 战地1数据查询工具 v";
 
         /// <summary>
         /// 检查更新地址

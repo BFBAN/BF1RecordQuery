@@ -26,7 +26,7 @@ namespace BF1RecordQuery
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static int ImageCount = 2;
+        private static int ImageCount = 3;
         private BackgroundWorker MainWorker;
 
         public MainWindow()
@@ -228,12 +228,12 @@ namespace BF1RecordQuery
                     ListBox_GameTools_Weapons.Items.Clear();
                     ListBox_GameTools_Vehicles.Items.Clear();
 
-                    MessageBox.Show($"查询玩家（{nameStr}）战绩失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"查询玩家（{nameStr}）战绩失败\n\n{result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"发生了未知错误\n\n{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -275,12 +275,12 @@ namespace BF1RecordQuery
                 {
                     ListBox_GameTools_Servers.Items.Clear();
 
-                    MessageBox.Show($"搜索（{nameStr}）服务器失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show($"搜索（{nameStr}）服务器失败\n\n{result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"发生了未知错误\n\n{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }
@@ -315,19 +315,19 @@ namespace BF1RecordQuery
             {
                 case 0:
                     b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Beachhead_BGLoop-4f04c02e.jpg"));
-                    b.Stretch = Stretch.Fill;
+                    b.Stretch = Stretch.UniformToFill;
                     break;
                 case 1:
                     b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Harbor_BGLoop-70b9c5f4.jpg"));
-                    b.Stretch = Stretch.Fill;
+                    b.Stretch = Stretch.UniformToFill;
                     break;
                 case 2:
                     b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Naval_BGLoop-dd6e9a89.jpg"));
-                    b.Stretch = Stretch.Fill;
+                    b.Stretch = Stretch.UniformToFill;
                     break;
                 case 3:
                     b.ImageSource = new BitmapImage(new Uri("pack://application:,,,/Image/Backgrounds/MP_Ridge_BGLoop-22333a03.jpg"));
-                    b.Stretch = Stretch.Fill;
+                    b.Stretch = Stretch.UniformToFill;
                     break;
             }
 

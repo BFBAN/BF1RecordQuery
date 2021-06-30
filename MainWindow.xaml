@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BF1RecordQuery"
         mc:Ignorable="d" x:Name="Window_Main" WindowStartupLocation="CenterScreen"
         FontFamily="/Fonts/#FuturaMaxiBook-TC" FontWeight="Light"
-        Title="[BFBAN] 战地1战绩查询工具" Width="1600" Height="900" MinWidth="800"
+        Title="[BFBAN] 战地1数据查询工具" Width="1600" Height="900" MinWidth="800"
         Loaded="Window_Main_Loaded">
 
     <Window.Background>
@@ -14,30 +14,18 @@
                     RenderOptions.BitmapScalingMode="HighQuality" Stretch="UniformToFill"/>
     </Window.Background>
 
-    <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-
-        <Style x:Key="ListBox"  TargetType="ListBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#c0c4ca"/>
-
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-        </Style>
-
-    </Window.Resources>
-
     <TabControl Background="Transparent" TabStripPlacement="top">
         <TabControl.Resources>
+            <Style TargetType="TabControl">
+                <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
             <Style TargetType="{x:Type TabPanel}">
                 <Setter Property="HorizontalAlignment" Value="Left"/>
             </Style>
         </TabControl.Resources>
 
-        <TabItem Header="查询" Style="{StaticResource MyTabItemStyle}">
+        <TabItem Header="戰績" Style="{StaticResource MyTabItemStyle}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -254,15 +242,15 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0" Text="★" VerticalAlignment="Center" Margin="20,0,20,0"/>
-                                <Image Grid.Column="1" Source="{Binding ServerImage}" Height="65" Stretch="Uniform">
+                                <TextBlock Grid.Column="0" Text="★" VerticalAlignment="Center" Margin="10,0,15,0"/>
+                                <Image Grid.Column="1" Source="{Binding ServerImage}" Height="70" Stretch="Uniform">
                                     <Image.ToolTip>
                                         <Image Source="{Binding ServerImage}"/>
                                     </Image.ToolTip>
                                 </Image>
 
                                 <UniformGrid Grid.Column="2" Rows="2" Margin="10,0,5,0" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding ServerName}" TextTrimming="CharacterEllipsis" Margin="5,5,5,0" FontSize="16"/>
+                                    <TextBlock Text="{Binding ServerName}" TextTrimming="CharacterEllipsis" Margin="5,5,5,0" FontSize="15"/>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Width="20" Height="15" Background="White" Margin="5,0,5,0" VerticalAlignment="Center">
                                             <Ellipse Width="7" Height="7" Fill="Red" VerticalAlignment="Center" HorizontalAlignment="Center"/>
