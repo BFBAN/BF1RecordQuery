@@ -64,7 +64,7 @@
 
                         <TextBox x:Name="TextBox_PlayerName" Text="BILIBli-21462117" VerticalContentAlignment="Center" 
                                  Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
-                                 CaretBrush="White" FontSize="13"/>
+                                 CaretBrush="White" FontSize="13" KeyDown="TextBox_PlayerName_KeyDown" ToolTip="输入完成后按回车键快捷查询玩家战绩"/>
                     </DockPanel>
 
                     <Grid Grid.Row="1">
@@ -232,13 +232,13 @@
                     
                     <DockPanel LastChildFill="True" Grid.Row="0">
                         <Button x:Name="Button_SearchServers" Style="{StaticResource MyButtonStyle}"
-                            DockPanel.Dock="Right" Content="搜索" ToolTip="搜索指定服务器"
-                            Margin="5" Padding="25,7,25,7" Foreground="White"
-                            Click="Button_SearchServers_Click" FontSize="13"/>
+                                DockPanel.Dock="Right" Content="搜索" ToolTip="搜索指定服务器"
+                                Margin="5" Padding="25,7,25,7" Foreground="White"
+                                Click="Button_SearchServers_Click" FontSize="13"/>
 
                         <TextBox x:Name="TextBox_SearchServers" Text="GHYNB" VerticalContentAlignment="Center" 
-                             Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
-                             CaretBrush="White" FontSize="13"/>
+                                 Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
+                                 CaretBrush="White" FontSize="13" KeyDown="TextBox_SearchServers_KeyDown" ToolTip="输入完成后按回车键快捷搜索指定服务器"/>
                     </DockPanel>
                 </Grid>
 

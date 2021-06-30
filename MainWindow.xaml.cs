@@ -71,7 +71,8 @@ namespace BF1RecordQuery
             webClient.Dispose();
         }
 
-        private async void Button_QueryRecord_Click(object sender, RoutedEventArgs e)
+
+        private async void QueryRecord()
         {
             try
             {
@@ -234,6 +235,54 @@ namespace BF1RecordQuery
             {
                 MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
+        }
+
+        private async void SearchServers()
+        {
+            try
+            {
+                string nameStr = TextBox_SearchServers.Text.Trim();
+
+                ListBox_GameTools_Servers.Items.Clear();
+                ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo
+                {
+                    ServerName = "正在搜索服务器中..."
+                });
+
+                string result = await GameToolsApi.GetServers(nameStr);
+                if (!result.Contains("\"servers\":[],"))
+                {
+                    GetServers getServers = JsonSerializer.Deserialize<GetServers>(result);
+
+                    ListBox_GameTools_Servers.Items.Clear();
+
+                    Random rd = new Random();
+
+                    foreach (var item in getServers.servers)
+                    {
+                        ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo()
+                        {
+                            ServerImage = item.url,
+                            ServerName = item.prefix,
+                            ServerMode = $"{item.mode} - {item.currentMap} - 60HZ",
+                            ServerPlayerCount = $"{item.serverInfo} [{item.inQue}]",
+                            ServerPing = $"{rd.Next(35, 65)}"
+                        });
+                    }
+                }
+                else
+                {
+                    ListBox_GameTools_Servers.Items.Clear();
+
+                    MessageBox.Show($"搜索（{nameStr}）服务器失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
         }
 
         private string GetKillStar(int kills)
@@ -291,49 +340,29 @@ namespace BF1RecordQuery
             UpdateBackground();
         }
 
-        private async void Button_SearchServers_Click(object sender, RoutedEventArgs e)
+        private void Button_QueryRecord_Click(object sender, RoutedEventArgs e)
         {
-            try
+            QueryRecord();
+        }
+
+        private void Button_SearchServers_Click(object sender, RoutedEventArgs e)
+        {
+            SearchServers();
+        }
+
+        private void TextBox_PlayerName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                string nameStr = TextBox_SearchServers.Text.Trim();
-
-                ListBox_GameTools_Servers.Items.Clear();
-                ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo
-                {
-                    ServerName = "正在搜索服务器中..."
-                });
-
-                string result = await GameToolsApi.GetServers(nameStr);
-                if (!result.Contains("\"servers\":[],"))
-                {
-                    GetServers getServers = JsonSerializer.Deserialize<GetServers>(result);
-
-                    ListBox_GameTools_Servers.Items.Clear();
-
-                    Random rd = new Random();
-
-                    foreach (var item in getServers.servers)
-                    {
-                        ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo()
-                        {
-                            ServerImage = item.url,
-                            ServerName = item.prefix,
-                            ServerMode = $"{item.mode} - {item.currentMap} - 60HZ",
-                            ServerPlayerCount = $"{item.serverInfo} [{item.inQue}]",
-                            ServerPing = $"{rd.Next(35, 65)}"
-                        });
-                    }
-                }
-                else
-                {
-                    ListBox_GameTools_Servers.Items.Clear();
-
-                    MessageBox.Show($"搜索（{nameStr}）服务器失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                QueryRecord();
             }
-            catch (Exception ex)
+        }
+
+        private void TextBox_SearchServers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
             {
-                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                SearchServers();
             }
         }
     }
