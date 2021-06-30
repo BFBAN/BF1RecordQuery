@@ -22,6 +22,7 @@ namespace BF1RecordQuery.Data
                     return nameStr;
                 }
 
+                #region HttpWebRequest
                 //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(nameStr);
                 //request.Proxy = null;
                 //request.KeepAlive = false;
@@ -47,6 +48,24 @@ namespace BF1RecordQuery.Data
                 //}
 
                 //return retString;
+                #endregion
+            });
+        }
+
+        public static Task<string> GetServers(string nameStr)
+        {
+            return Task.Run(() =>
+            {
+                nameStr = "https://api.gametools.network/bf1/servers/?name=" + nameStr + "&lang=zh-tw&region=all&platform=pc";
+
+                WebClient wb = new WebClient();
+                {
+                    wb.Encoding = Encoding.UTF8;
+                    wb.Proxy = null;
+                    nameStr = wb.DownloadString(new Uri(nameStr));
+
+                    return nameStr;
+                }
             });
         }
     }

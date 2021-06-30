@@ -38,8 +38,6 @@ namespace BF1RecordQuery
         {
             Title = MyUtils.WindowTitle + MyUtils.LocalVersionInfo;
 
-            UpdateBackground();
-
             MainWorker = new BackgroundWorker();
             MainWorker.DoWork += MainWorker_DoWork;
             MainWorker.RunWorkerAsync();
@@ -289,6 +287,52 @@ namespace BF1RecordQuery
         private void Button_UpdateImage_Click(object sender, RoutedEventArgs e)
         {
             UpdateBackground();
+        }
+
+        private async void Button_SearchServers_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string nameStr = TextBox_SearchServers.Text.Trim();
+
+                ListBox_GameTools_Servers.Items.Clear();
+                ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo
+                {
+                    ServerName = "正在搜索服务器中..."
+                });
+
+                string result = await GameToolsApi.GetServers(nameStr);
+                if (!result.Contains("\"servers\":[],"))
+                {
+                    GetServers getServers = JsonSerializer.Deserialize<GetServers>(result);
+
+                    ListBox_GameTools_Servers.Items.Clear();
+
+                    Random rd = new Random();
+
+                    foreach (var item in getServers.servers)
+                    {
+                        ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo()
+                        {
+                            ServerImage = item.url,
+                            ServerName = item.prefix,
+                            ServerMode = $"{item.mode} - {item.currentMap} - 60HZ",
+                            ServerPlayerCount = $"{item.serverInfo} [{item.inQue}]",
+                            ServerPing = $"{rd.Next(35, 65)}"
+                        });
+                    }
+                }
+                else
+                {
+                    ListBox_GameTools_Servers.Items.Clear();
+
+                    MessageBox.Show($"搜索（{nameStr}）服务器失败 {result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"发生了未知错误\n\n {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
