@@ -7,8 +7,8 @@
     <Platforms>AnyCPU;x64</Platforms>
     <StartupObject>BF1RecordQuery.App</StartupObject>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <FileVersion>1.0.0.4</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
