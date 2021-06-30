@@ -50,9 +50,8 @@
                                 Margin="5" Padding="25,7,25,7" Foreground="White"
                                 Click="Button_QueryRecord_Click" FontSize="13"/>
 
-                        <TextBox x:Name="TextBox_PlayerName" Text="BILIBli-21462117" VerticalContentAlignment="Center" 
-                                 Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
-                                 CaretBrush="White" FontSize="13" KeyDown="TextBox_PlayerName_KeyDown" ToolTip="输入完成后按回车键快捷查询玩家战绩"/>
+                        <TextBox x:Name="TextBox_PlayerName" Text="BILIBli-21462117" Style="{DynamicResource MyTextBoxStyle}" 
+                                 Margin="5,5,0,5" FontSize="13" KeyDown="TextBox_PlayerName_KeyDown" ToolTip="输入完成后按回车键快捷查询玩家战绩"/>
                     </DockPanel>
 
                     <Grid Grid.Row="1">
@@ -61,7 +60,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Grid.Column="0" Margin="5" Width="60" Height="60" BorderBrush="#c0c4ca" BorderThickness="1">
+                        <Border Grid.Column="0" Margin="5,0,5,0" Width="60" Height="60" BorderBrush="#c0c4ca" BorderThickness="0.7">
                             <Image x:Name="Image_UserAvatar" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality">
                                 <Image.ToolTip>
                                     <Image x:Name="ImageToolTip_UserAvatar" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -76,14 +75,14 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock x:Name="TextBlock_UserName" Grid.Row="0" Text="玩家ID"
-                                       VerticalAlignment="Bottom" Margin="5,5,5,0" FontSize="20"/>
+                                       VerticalAlignment="Bottom" Margin="5,0,5,0" FontSize="20"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Top">
-                                <Image x:Name="Image_Rank" Margin="5,0,5,5" VerticalAlignment="Center"/>
-                                <TextBlock Text="等級" Margin="5,0,0,5" VerticalAlignment="Center" FontSize="13"/>
-                                <TextBlock x:Name="TextBlock_Rank" Text="0" Margin="5,0,5,5" VerticalAlignment="Center" FontSize="13"/>
-                                <TextBlock Text="遊戲時間" Margin="5,0,0,5" VerticalAlignment="Center" FontSize="13"/>
-                                <TextBlock x:Name="TextBlock_PlayedTime" Text="0" Margin="5,0,5,5" VerticalAlignment="Center" FontSize="13"/>
+                                <Image x:Name="Image_Rank" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="等級" Margin="5,0,0,0" VerticalAlignment="Center" FontSize="13"/>
+                                <TextBlock x:Name="TextBlock_Rank" Text="0" Margin="5,0,5,0" VerticalAlignment="Center" FontSize="13"/>
+                                <TextBlock Text="遊戲時間" Margin="5,0,0,0" VerticalAlignment="Center" FontSize="13"/>
+                                <TextBlock x:Name="TextBlock_PlayedTime" Text="0" Margin="5,0,5,0" VerticalAlignment="Center" FontSize="13"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -224,9 +223,8 @@
                                 Margin="5" Padding="25,7,25,7" Foreground="White"
                                 Click="Button_SearchServers_Click" FontSize="13"/>
 
-                        <TextBox x:Name="TextBox_SearchServers" Text="GHYNB" VerticalContentAlignment="Center" 
-                                 Margin="5,5,0,5" Padding="3" Background="Transparent" Foreground="White" BorderBrush="#c0c4ca"
-                                 CaretBrush="White" FontSize="13" KeyDown="TextBox_SearchServers_KeyDown" ToolTip="输入完成后按回车键快捷搜索指定服务器"/>
+                        <TextBox x:Name="TextBox_SearchServers" Text="GHYNB" Style="{DynamicResource MyTextBoxStyle}"
+                                 Margin="5,5,0,5" FontSize="13" KeyDown="TextBox_SearchServers_KeyDown" ToolTip="输入完成后按回车键快捷搜索指定服务器"/>
                     </DockPanel>
                 </Grid>
 
