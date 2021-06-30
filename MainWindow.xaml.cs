@@ -76,6 +76,9 @@ namespace BF1RecordQuery
         {
             try
             {
+                // 刷新DNS缓存
+                MyUtils.CMD_Code("ipconfig /flushdns");
+
                 string nameStr = TextBox_PlayerName.Text.Trim();
 
                 ListBox_GameTools_Stats.Items.Clear();
@@ -242,6 +245,9 @@ namespace BF1RecordQuery
         {
             try
             {
+                // 刷新DNS缓存
+                MyUtils.CMD_Code("ipconfig /flushdns");
+
                 string nameStr = TextBox_SearchServers.Text.Trim();
 
                 ListBox_GameTools_Servers.Items.Clear();

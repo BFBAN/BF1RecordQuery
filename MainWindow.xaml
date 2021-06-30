@@ -104,7 +104,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Border Grid.Column="0" x:Name="BorderWeapon" Margin="5,0,0,0"
-                                            Width="100" Height="60" Background="Transparent">
+                                            Width="100" Height="50" Background="Transparent">
                                         <Image Margin="5" Source="{Binding WeaponImage}" Stretch="Uniform">
                                             <Image.ToolTip>
                                                 <Border Background="#5d5a58">
@@ -213,7 +213,6 @@
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     
@@ -226,6 +225,10 @@
                         <TextBox x:Name="TextBox_SearchServers" Text="GHYNB" Style="{DynamicResource MyTextBoxStyle}"
                                  Margin="5,5,0,5" FontSize="13" KeyDown="TextBox_SearchServers_KeyDown" ToolTip="输入完成后按回车键快捷搜索指定服务器"/>
                     </DockPanel>
+
+                    <WrapPanel Orientation="Horizontal" Grid.Row="1">
+                        
+                    </WrapPanel>
                 </Grid>
 
                 <ListBox Grid.Column="1" Name="ListBox_GameTools_Servers" Margin="0,5,5,5"
