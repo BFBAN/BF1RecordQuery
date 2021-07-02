@@ -378,6 +378,7 @@
                                     <Image
                                         Grid.Column="1"
                                         Height="60"
+                                        RenderOptions.BitmapScalingMode="HighQuality"
                                         Source="{Binding ServerImage}"
                                         Stretch="Uniform">
                                         <Image.ToolTip>
