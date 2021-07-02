@@ -7,8 +7,8 @@
     <Platforms>AnyCPU;x64</Platforms>
     <StartupObject>BF1RecordQuery.App</StartupObject>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.4</AssemblyVersion>
-    <FileVersion>1.0.0.4</FileVersion>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
+    <FileVersion>1.0.0.5</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +17,7 @@
     <None Remove="Image\Backgrounds\MP_Harbor_BGLoop-70b9c5f4.jpg" />
     <None Remove="Image\Backgrounds\MP_Naval_BGLoop-dd6e9a89.jpg" />
     <None Remove="Image\Backgrounds\MP_Ridge_BGLoop-22333a03.jpg" />
+    <None Remove="Image\splash-bf1-xp2-launch-fc2d65e0.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <Resource Include="Image\Backgrounds\MP_Harbor_BGLoop-70b9c5f4.jpg" />
     <Resource Include="Image\Backgrounds\MP_Naval_BGLoop-dd6e9a89.jpg" />
     <Resource Include="Image\Backgrounds\MP_Ridge_BGLoop-22333a03.jpg" />
+    <Resource Include="Image\splash-bf1-xp2-launch-fc2d65e0.jpg" />
   </ItemGroup>
 
 </Project>

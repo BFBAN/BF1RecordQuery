@@ -14,10 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.Json;
 using System.ComponentModel;
+using System.Net;
+using System.Threading;
 
 using BF1RecordQuery.Data;
 using BF1RecordQuery.Core;
-using System.Net;
 
 namespace BF1RecordQuery
 {
@@ -31,11 +32,23 @@ namespace BF1RecordQuery
 
         public MainWindow()
         {
+            DoSomethingThatTakesALongTime();
+            App.splashScreen.LoadComplete();
+
             InitializeComponent();
+        }
+
+        private static void DoSomethingThatTakesALongTime()
+        {
+            Thread.Sleep(1500);
         }
 
         private void Window_Main_Loaded(object sender, RoutedEventArgs e)
         {
+            //Topmost = true;
+            //Topmost = false;
+            Activate();
+
             Title = MyUtils.WindowTitle + MyUtils.LocalVersionInfo;
 
             MainWorker = new BackgroundWorker();
@@ -59,25 +72,33 @@ namespace BF1RecordQuery
 
             if (WebVersion != LocalVersion)
             {
+                SetResultInfo("信息 : 有新的版本可供使用，正在後臺下載最新版本...");
+
                 string path = MyUtils.CurrentDirectory + MyUtils.WindowTitle + WebVersion + ".exe";
 
                 // 下载更新
                 MyUtils.HttpDownloadFile(MyUtils.DownloadUpdateAddress, path);
 
-                MessageBox.Show("新版本下载完成，你下次启动软件可以选择当前目录下的最新版本使用。", "提示",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
+                SetResultInfo("信息 : 最新版本下載完成，你下次啟動軟件時可以選擇當前目錄下的最新版本使用");
             }
 
             webClient.Dispose();
         }
 
+        private void SetResultInfo(string str)
+        {
+            Dispatcher.BeginInvoke(new Action(delegate
+            {
+                TextBlock_ResultInfo.Text = str;
+            }));
+        }
 
         private async void QueryRecord()
         {
             try
             {
                 // 刷新DNS缓存
-                MyUtils.CMD_Code("ipconfig /flushdns");
+                //MyUtils.CMD_Code("ipconfig /flushdns");
 
                 string nameStr = TextBox_PlayerName.Text.Trim();
 
@@ -85,14 +106,14 @@ namespace BF1RecordQuery
                 ListBox_GameTools_Weapons.Items.Clear();
                 ListBox_GameTools_Vehicles.Items.Clear();
 
-                ListBox_GameTools_Stats.Items.Add("正在查詢中...");
+                ListBox_GameTools_Stats.Items.Add("正在查詢...");
                 ListBox_GameTools_Weapons.Items.Add(new ListBoxWeaponData
                 {
-                    WeaponName = "正在查詢中..."
+                    WeaponName = "正在查詢..."
                 });
                 ListBox_GameTools_Vehicles.Items.Add(new ListBoxVehicleData
                 {
-                    VehicleName = "正在查詢中..."
+                    VehicleName = "正在查詢..."
                 });
                 TextBlock_UserName.Text = "Loading...";
                 TextBlock_Rank.Text = "Loading...";
@@ -100,6 +121,8 @@ namespace BF1RecordQuery
                 Image_UserAvatar.Source = null;
                 ImageToolTip_UserAvatar.Source = null;
                 Image_Rank.Source = null;
+
+                SetResultInfo($"信息 : 正在查詢玩家（{nameStr}）戰績...");
 
                 /*******************************************************************************/
 
@@ -220,6 +243,8 @@ namespace BF1RecordQuery
                             VehicleDestroyede = $"摧毀 : {item.destroyed}"
                         });
                     }
+
+                    SetResultInfo($"信息 : 查詢玩家（{nameStr}）戰績成功");
                 }
                 else
                 {
@@ -231,14 +256,13 @@ namespace BF1RecordQuery
                     ListBox_GameTools_Weapons.Items.Clear();
                     ListBox_GameTools_Vehicles.Items.Clear();
 
-                    MessageBox.Show($"查询玩家（{nameStr}）战绩失败\n\n{result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    SetResultInfo($"錯誤 : 查詢玩家（{nameStr}）戰績失敗 {result}");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生了未知错误\n\n{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                SetResultInfo($"錯誤 : 發生了未知錯誤 {ex.Message}");
             }
-
         }
 
         private async void SearchServers()
@@ -246,15 +270,17 @@ namespace BF1RecordQuery
             try
             {
                 // 刷新DNS缓存
-                MyUtils.CMD_Code("ipconfig /flushdns");
+                //MyUtils.CMD_Code("ipconfig /flushdns");
 
                 string nameStr = TextBox_SearchServers.Text.Trim();
 
                 ListBox_GameTools_Servers.Items.Clear();
                 ListBox_GameTools_Servers.Items.Add(new ListBoxServerInfo
                 {
-                    ServerName = "正在搜索服务器中..."
+                    ServerName = "正在搜索服务器..."
                 });
+
+                SetResultInfo($"信息 : 正在搜索（{nameStr}）服務器...");
 
                 string result = await GameToolsApi.GetServers(nameStr);
                 if (!result.Contains("\"servers\":[],"))
@@ -273,22 +299,23 @@ namespace BF1RecordQuery
                             ServerName = item.prefix,
                             ServerMode = $"{item.mode} - {item.currentMap} - 60HZ",
                             ServerPlayerCount = $"{item.serverInfo} [{item.inQue}]",
-                            ServerPing = $"{rd.Next(35, 65)}"
+                            ServerPing = $"{rd.Next(30, 45)}"
                         });
                     }
+
+                    SetResultInfo($"信息 : 搜索（{nameStr}）服務器成功");
                 }
                 else
                 {
                     ListBox_GameTools_Servers.Items.Clear();
 
-                    MessageBox.Show($"搜索（{nameStr}）服务器失败\n\n{result}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    SetResultInfo($"錯誤 : 搜索（{nameStr}）服務器失敗 {result}");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"发生了未知错误\n\n{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                SetResultInfo($"錯誤 : 發生了未知錯誤 {ex.Message}");
             }
-
         }
 
         private string GetKillStar(int kills)
@@ -339,6 +366,8 @@ namespace BF1RecordQuery
 
             Window_Main.Background = null;
             Window_Main.Background = b;
+
+            SetResultInfo($"信息 : 更換背景圖片成功");
         }
 
         private void Button_UpdateImage_Click(object sender, RoutedEventArgs e)
