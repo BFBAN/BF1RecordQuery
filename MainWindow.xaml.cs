@@ -81,6 +81,10 @@ namespace BF1RecordQuery
 
                 SetResultInfo("信息 : 最新版本下載完成，你下次啟動軟件時可以選擇當前目錄下的最新版本使用");
             }
+            else
+            {
+                SetResultInfo("信息 : 恭喜，你使用的已是最新版本");
+            }
 
             webClient.Dispose();
         }
