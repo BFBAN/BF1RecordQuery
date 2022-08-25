@@ -124,7 +124,7 @@ namespace BF1RecordQuery
                 TextBlock_PlayedTime.Text = "Loading...";
                 Image_UserAvatar.Source = null;
                 ImageToolTip_UserAvatar.Source = null;
-                Image_Rank.Source = null;
+                //Image_Rank.Source = null;
 
                 SetResultInfo($"信息 : 正在查詢玩家（{nameStr}）戰績...");
 
