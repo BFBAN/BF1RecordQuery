@@ -253,8 +253,8 @@ namespace BF1RecordQuery
                 else
                 {
                     TextBlock_UserName.Text = "未知";
-                    TextBlock_Rank.Text = "0";
-                    //TextBlock_PlayedTime.Text = "0";
+                    //TextBlock_Rank.Text = "0";
+                    TextBlock_PlayedTime.Text = "0";
 
                     ListBox_GameTools_Stats.Items.Clear();
                     ListBox_GameTools_Weapons.Items.Clear();
