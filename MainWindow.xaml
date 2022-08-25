@@ -141,17 +141,6 @@
                                         Margin="5,0,0,0"
                                         VerticalAlignment="Center"
                                         FontSize="13"
-                                        Text="等級" />
-                                    <TextBlock
-                                        x:Name="TextBlock_Rank"
-                                        Margin="5,0,5,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="13"
-                                        Text="0" />
-                                    <TextBlock
-                                        Margin="5,0,0,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="13"
                                         Text="遊戲時間" />
                                     <TextBlock
                                         x:Name="TextBlock_PlayedTime"

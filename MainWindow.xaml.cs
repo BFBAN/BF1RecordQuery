@@ -120,7 +120,7 @@ namespace BF1RecordQuery
                     VehicleName = "正在查詢..."
                 });
                 TextBlock_UserName.Text = "Loading...";
-                TextBlock_Rank.Text = "Loading...";
+                //TextBlock_Rank.Text = "Loading...";
                 TextBlock_PlayedTime.Text = "Loading...";
                 Image_UserAvatar.Source = null;
                 ImageToolTip_UserAvatar.Source = null;
@@ -146,8 +146,8 @@ namespace BF1RecordQuery
                     ImageToolTip_UserAvatar.Source = Image_UserAvatar.Source;
 
                     TextBlock_UserName.Text = getStats.userName;
-                    Image_Rank.Source = new BitmapImage(new Uri(getStats.rankImg));
-                    TextBlock_Rank.Text = getStats.rank.ToString();
+                    //Image_Rank.Source = new BitmapImage(new Uri(getStats.rankImg));
+                    //TextBlock_Rank.Text = getStats.rank.ToString();
                     TextBlock_PlayedTime.Text = getStats.timePlayed;
 
                     //ListBox_GameTools_Stats.Items.Add($"玩家ID : {getStats.userName}");
@@ -254,7 +254,7 @@ namespace BF1RecordQuery
                 {
                     TextBlock_UserName.Text = "未知";
                     TextBlock_Rank.Text = "0";
-                    TextBlock_PlayedTime.Text = "0";
+                    //TextBlock_PlayedTime.Text = "0";
 
                     ListBox_GameTools_Stats.Items.Clear();
                     ListBox_GameTools_Weapons.Items.Clear();
